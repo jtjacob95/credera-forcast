@@ -1,29 +1,177 @@
 .App {
+  min-height: 100vh;
+  background: linear-gradient(45deg, #115DA3 0%, #4ECFED 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif, sans-serif;
+  color: #4A4A4A;
+}
+.title-date-loc{
+  color: #FFFFFF;
+  padding: 20px;
   text-align: center;
 }
 
-.App-logo {
-  height: 1vmax;
-  pointer-events: none;
+.CenterMain {
+  height:500px;
+  width: 700px;
+  position: relative;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.203436);
+  border-radius: 3px; 
+  z-index: 1;
+  
+}
+
+.temperature-controller{
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  background: #2685BD;
+  mix-blend-mode: normal;
+  opacity: 0.65;
+  border-radius: 12.5px;
+  border: none;
+  height: 2em;
+  color: #FFFFFF;
+
+}
+.temperature-controller:focus{
+  outline: none;
 }
 
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+
+.t-selected{
+  background-color: #FFFFFF;
+  padding: 1px;
+  border-radius: 15.5px;
+  border: none;
+
+  color: #115DA3;
+
+}
+
+.main-box{
+  height: 348px;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+  z-index: 3;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.203436);
+  border-radius: 3px 3px 0px 0px;
+}
+
+.main-info-box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 1z0px;
+  padding-left: 20px;
+}
+
+.main-temperature{
+  font-size: 3em;
+  padding-right: 10px;
+  color: #65AED5;
+}
+
+.main-weather-icon{
+  margin-top: 30px;
+  padding-right: 15px;
+  height: 3em;
+ 
+}
+
+.main-info{
+  margin-top: 20px;
+  color: #65AED5;
+}
+
+.forcast {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  text-align: center;
+  width: 700px ;
+}
+
+.day-box{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-around;
+  padding: 20px 45px 20px 45px;
+  border-left: 1px solid #d8d8d8
 }
 
-.App-link {
-  color: #61dafb;
+.ignore{
+  border-left: none !important;
+}
+
+
+
+.day-of-week {
+  font-size: .8em;
+  font-weight: bold;
+  padding-bottom: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: #4A4A4A;
+}
+
+.day-temperature {
+  font-size: 1.2em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: #4A4A4A;
 }
 
 .day-weather-icon{
-  height: 1vmax;
+  width:50px ;
 }
 
+.cloud-left{
+  position: absolute;
+  left: 20vw;
+  top: 30vh;
+  z-index: 99;
+  
+  animation: 25s infinite alternate cloudLeftMove;
+
+  transition-timing-function: linear;
+
+}
+
+.cloud-right{
+  position: absolute;
+  right: 20vw;
+  top: 40vh;
+  z-index: 100;
+
+  animation: 40s infinite alternate cloudRightMove;
+  transition-timing-function: linear;
+
+  }
+
+  @keyframes cloudLeftMove {
+    from {
+      left: 20vw;
+    }
+  
+    to {
+      left: 60vw;
+    }
+  }
+
+  @keyframes cloudRightMove {
+    from {
+      right: 20vw;
+    }
+
+    to{
+      right: 60vw;
+    }
+  }

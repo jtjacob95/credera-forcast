@@ -8,32 +8,54 @@ import partlyCloudy from './Partly-Cloudy.svg';
 import rain from './Rain.svg';
 import snow from './Snow.svg';
 import thunderstorm from './Thunderstorm.svg';
+import dallas from './Dallas.png';
+import cloudLeft from './CloudLeft.png';
+import cloudRight from './CloudRight.png';
 import './App.css';
 
-function DayWeather(props){
+function DayWeatherOne(props){
   return(
-    <div className="day-box">
+    <div className="ignore day-box ">
       <div className="day-of-week">
         {props.day}
       </div>
       <img src={props.icon} className="day-weather-icon"></img>
       <div className="day-temperature">
-        {props.temperature}
+        {props.temperature}&#176;
+      </div>
+    </div>
+  );
+}
+
+function DayWeather(props){
+  return(
+    <div className="day-box ">
+      <div className="day-of-week">
+        {props.day}
+      </div>
+      <img src={props.icon} className="day-weather-icon"></img>
+      <div className="day-temperature">
+        {props.temperature}<span>&#176;</span>
       </div>
     </div>
   );
 }
 
 function MainWeather(props){
+  var sectionStyle = {
+    backgroundImage: `url(${dallas})`
+  };
   return(
-    <div className="day-box">
-      <div className="day-temperature">
-        {props.temperature}
-      </div>
-      <img src={props.icon} className="day-weather-icon"></img>
-      <div className="day-info">
-        {props.description}
-        {props.speed}
+    <div className="main-box" style={ sectionStyle } >
+      <div className="main-info-box">
+        <div className="main-temperature">
+          {props.temperature}<span>&#176;</span>
+        </div>
+        <img src={props.icon} className="main-weather-icon"></img>
+        <div className="main-info">
+          {props.description}<br/>
+          {props.speed}
+        </div>
       </div>
     </div>
   );
@@ -142,20 +164,49 @@ class App extends React.Component{
       return props;
   }
 
+  handleTemperature = () =>{
+    console.log();
+    var curr = this.state.isCelcius;
+    this.setState({
+      isCelcius : !curr
+    });
+  };
+
+  getTodayDate(){
+    var todayDate = new Date();
+    var finDate = ""+this.parseDay(todayDate.getDay(),0,false) + ",";
+    var mon = ["Jan", "Feb", "Mar", "April", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+    finDate += mon[todayDate.getMonth()]+" "+ todayDate.getDay()+","+ todayDate.getFullYear();
+    return finDate;
+
+    
+  }
+
   render(){
+
+
     return (
-      <div className="App">
+      <div className="App">           
           <div className = "title-date-loc"> 
-            Dallas, Texas
+            Dallas, Texas<br/>
+            {this.getTodayDate()}
           </div>
-          <div>
-            <MainWeather {...this.parseData(0)} description={this.state.weatherDescription} speed={this.state.windSpeed} />
-            <div>
-              <DayWeather {...this.parseData(1)}/>
-              <DayWeather {...this.parseData(2)}/>
-              <DayWeather {...this.parseData(3)}/>
-              <DayWeather {...this.parseData(4)}/>
-              <DayWeather {...this.parseData(5)}/>
+          <img src={cloudLeft} className="cloud-left"/>
+          <img src={cloudRight} className="cloud-right"/>
+          <div className="CenterMain">
+            <button className="temperature-controller" onClick={this.handleTemperature}>
+              <span className={!this.state.isCelcius ? "t-selected" : ""}>F&#176;</span> &nbsp;  
+              <span className={this.state.isCelcius ? "t-selected" : ""}>C&#176;</span> 
+              </button>
+            <MainWeather {...this.parseData(0)} description={this.state.weatherDescription} speed={this.state.windSpeed} className="today"/>
+            
+
+            <div className="forcast">
+              <DayWeatherOne {...this.parseData(1)} />
+              <DayWeather {...this.parseData(2)} />
+              <DayWeather {...this.parseData(3)} />
+              <DayWeather {...this.parseData(4)} />
+              <DayWeather {...this.parseData(5)} />
             </div>
             
           </div>
