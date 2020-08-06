@@ -1,5 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
+import clear from './Clear.svg';
+import cloudy from './Cloudy.svg';
+import drizzle from './Drizzle.svg';
+import haze from './Haze.svg';
+import partlyCloudy from './Partly-Cloudy.svg';
+import rain from './Rain.svg';
+import snow from './Snow.svg';
+import thunderstorm from './Thunderstorm.svg';
 import './App.css';
 
 function DayWeather(props){
@@ -90,27 +98,18 @@ class App extends React.Component{
   }
 
   parseIcon(code){
-    {/* Codes based on api
-    2 = thunderstorm
-    3 = drizzle
-    5 = rain
-    6 = snow
-    7 = haze
-    800 = clear
-    801/802 = partly cloudy
-    803/804 = cloudy
-    */}
-    var source = ["clear","partly cloudy","thunderstorm","drizzle","cloudy","rain","snow","haze",]
-    var calc = Math.floor(code);
-    if(calc == 8){
-      var calc2 = code%800
-      if(calc2 == 0){
-        return source[0];
+
+    var source = [clear,partlyCloudy ,cloudy,thunderstorm,drizzle,cloudy,rain,snow,haze];
+    var calc = Math.floor(code/100);
+    if(calc === 8){
+      var calc2 = code%800;
+      if(calc2 === 0){
+        return source[0];   
       }
-      else if(calc2 == 1 || calc2 == 2){
+      else if(calc2 === 1 || calc2 === 2){
         return source[1];
       }
-      else if(calc2 == 3 || calc2 == 4){
+      else if(calc2 === 3 || calc2 === 4){
         return source[4];
       }
     }
@@ -133,7 +132,7 @@ class App extends React.Component{
   parseData(i){
 
       var day = this.parseDay(this.state.currDay,i,true);
-      var icon = 0;//this.parseIcon(currData.weather[0].id);
+      var icon = this.parseIcon(this.state.weatherData[i]);
       var temperature = this.parseTemperature(this.state.isCelcius, this.state.tempData[i])
       var props = {
         day,
