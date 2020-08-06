@@ -11,6 +11,7 @@ import thunderstorm from './Thunderstorm.svg';
 import dallas from './Dallas.png';
 import cloudLeft from './CloudLeft.png';
 import cloudRight from './CloudRight.png';
+import locationIcon from './location_on - material.svg'
 import './App.css';
 
 function DayWeatherOne(props){
@@ -54,7 +55,7 @@ function MainWeather(props){
         <img src={props.icon} className="main-weather-icon"></img>
         <div className="main-info">
           {props.description}<br/>
-          {props.speed}
+          {props.speed} mph
         </div>
       </div>
     </div>
@@ -174,9 +175,9 @@ class App extends React.Component{
 
   getTodayDate(){
     var todayDate = new Date();
-    var finDate = ""+this.parseDay(todayDate.getDay(),0,false) + ",";
+    var finDate = ""+this.parseDay(todayDate.getDay(),0,false) + ", ";
     var mon = ["Jan", "Feb", "Mar", "April", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
-    finDate += mon[todayDate.getMonth()]+" "+ todayDate.getDay()+","+ todayDate.getFullYear();
+    finDate += mon[todayDate.getMonth()]+" "+ todayDate.getDay()+", "+ todayDate.getFullYear();
     return finDate;
 
     
@@ -188,6 +189,7 @@ class App extends React.Component{
     return (
       <div className="App">           
           <div className = "title-date-loc"> 
+            <img src={locationIcon} className="loc-icon"/>
             Dallas, Texas<br/>
             {this.getTodayDate()}
           </div>

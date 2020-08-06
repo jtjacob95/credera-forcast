@@ -82,8 +82,12 @@
   margin-top: 30px;
   padding-right: 15px;
   height: 3em;
- 
+  transition: transform 0.5s;
 }
+.main-weather-icon:hover{ 
+  transform: scale(1.1);
+}
+
 
 .main-info{
   margin-top: 20px;
@@ -111,11 +115,7 @@
 
 .ignore{
   border-left: none !important;
-}
-
-
-
-.day-of-week {
+}.day-of-week {
   font-size: .8em;
   font-weight: bold;
   padding-bottom: 10px;
@@ -129,8 +129,13 @@
   color: #4A4A4A;
 }
 
+
 .day-weather-icon{
   width:50px ;
+  transition: transform 0.5s;
+}
+.day-weather-icon:hover{ 
+  transform: scale(1.1);
 }
 
 .cloud-left{
@@ -139,10 +144,16 @@
   top: 30vh;
   z-index: 99;
   
-  animation: 25s infinite alternate cloudLeftMove;
-
+  animation: 20s infinite alternate cloudLeftMove;
+  transition: opacity 1s;
   transition-timing-function: linear;
+}
+.cloud-left:hover{
+  opacity: 0;
+}
 
+.loc-icon{
+  padding-right:2px;
 }
 
 .cloud-right{
@@ -151,10 +162,14 @@
   top: 40vh;
   z-index: 100;
 
-  animation: 40s infinite alternate cloudRightMove;
+  animation: 30s infinite alternate cloudRightMove;
+  transition: opacity 1s;
   transition-timing-function: linear;
+}
+  .cloud-right:hover{
+    opacity: 0;
+}
 
-  }
 
   @keyframes cloudLeftMove {
     from {
@@ -175,3 +190,77 @@
       right: 60vw;
     }
   }
+
+
+  @media screen and (max-width:720px){
+    .App {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      flex-direction: column;
+      font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif, sans-serif;
+      color: #4A4A4A;
+      padding-bottom: 40px;
+    }
+    .CenterMain {
+      height:850px;
+      width: 320px;
+      position: relative;
+    }
+    
+    .main-info-box{
+      flex-direction: column;
+      align-items: flex-start;
+      padding-top: 10px;
+      padding-left: 20px;
+    }
+
+    .main-weather-icon{
+      margin-top: 10px;
+      padding-right: 15px;
+      height: 3em;
+      transition: transform 0.5s;
+    }
+    .main-weather-icon:hover{ 
+      transform: scale(1.1);
+    }
+    
+    
+    .main-info{
+      position: absolute;
+      left: 100px;
+      margin-top: 10px;
+      color: #65AED5;
+    }
+
+    .forcast {
+      bottom: 0;
+      flex-direction: column;
+      justify-content: space-around;
+      text-align: center;
+      width: 320px ;
+    }
+
+
+    .day-box{
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+      padding: 20px 20px 20px 20px;
+      border-left: 0px solid #d8d8d8;
+      border-top: 1px solid #d8d8d8;
+    }
+
+    .day-of-week {
+      padding-bottom: 0px;
+      font-size: 1em;
+
+  
+    }
+    
+    .day-temperature {
+      font-size: 1.4em;
+
+    }
+  }
+
